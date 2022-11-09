@@ -1,0 +1,6 @@
+[32mINFO    [0m WDM:logger.py:27 
+
+[32mINFO    [0m WDM:logger.py:27 ====== WebDriver manager ======
+[32mINFO    [0m WDM:logger.py:27 Current google-chrome version is 107.0.5304
+[32mINFO    [0m WDM:logger.py:27 Get LATEST chromedriver version for 107.0.5304 google-chrome
+[32mINFO    [0m WDM:logger.py:27 Driver [C:\Users\Koil\.wdm\drivers\chromedriver\win32\107.0.5304.62\chromedriver.exe] found in cache
