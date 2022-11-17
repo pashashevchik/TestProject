@@ -13,8 +13,8 @@ class TestInteractions:
             sortable_page.open()
             list_before, list_after = sortable_page.change_list_order()
             grid_before, grid_after = sortable_page.change_grid_order()
-            assert list_before != list_after, 'the order of the list has not been changed'
-            assert grid_before != grid_after, 'the order of the grid has not been changed'
+            assert list_before != list_after
+            assert grid_before != grid_after
 
     @allure.feature('Selectable Page')
     class TestSelectablePage:
@@ -24,8 +24,8 @@ class TestInteractions:
             selectable_page.open()
             item_list = selectable_page.select_list_item()
             item_grid = selectable_page.select_grid_item()
-            assert len(item_list) > 0, "no elements were selected"
-            assert len(item_grid) > 0, "no elements were selected"
+            assert len(item_list) > 0
+            assert len(item_grid) > 0
 
     @allure.feature('Resizable Page')
     class TestResizablePage:

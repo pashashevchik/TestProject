@@ -15,28 +15,28 @@ class BasePage:
         self.driver.get(self.url)
 
     @allure.step('Find a visible element')
-    def element_is_visible(self, locator, timeout=5):
+    def element_is_visible(self, locator, timeout=10):
         self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     @allure.step('Find visible elements')
-    def elements_are_visible(self, locator, timeout=5):
+    def elements_are_visible(self, locator, timeout=10):
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     @allure.step('Find a present element')
-    def element_is_present(self, locator, timeout=5):
+    def element_is_present(self, locator, timeout=10):
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
     @allure.step('Find present elements')
-    def elements_are_present(self, locator, timeout=5):
+    def elements_are_present(self, locator, timeout=10):
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
     @allure.step('Find a not visible element')
-    def element_is_not_visible(self, locator, timeout=5):
+    def element_is_not_visible(self, locator, timeout=10):
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
     @allure.step('Find clickable elements')
-    def element_is_clickable(self, locator, timeout=5):
+    def element_is_clickable(self, locator, timeout=12):
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     @allure.step('Go to specified element')
@@ -76,4 +76,5 @@ class BasePage:
     @allure.step('Remove footer')
     def remove_footer(self):
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
-        self.driver.execute_script("document.getElementsById('close-fixedban').remove();")
+        self.driver.execute_script("document.getElementById('close-fixedban').remove();")
+        self.driver.execute_script("document.getElementById('google_ads_iframe_/21849154601,22343295815/Ad.Plus-Anchor_0').remove();")

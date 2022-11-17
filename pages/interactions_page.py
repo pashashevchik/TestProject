@@ -1,7 +1,6 @@
 import random
 import re
 import time
-
 import allure
 
 from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
@@ -80,7 +79,7 @@ class ResizablePage(BasePage):
 
     @allure.step('change size resizable box')
     def change_size_resizable_box(self):
-        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE), 400, 200)
+        self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE), 500, 200)
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE_BOX))
         self.action_drag_and_drop_by_offset(self.element_is_present(self.locators.RESIZABLE_BOX_HANDLE), -500, -300)
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE_BOX))
@@ -88,11 +87,9 @@ class ResizablePage(BasePage):
 
     @allure.step('change size resizable')
     def change_size_resizable(self):
-        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZABLE_HANDLE),
-                                            random.randint(1, 300), random.randint(1, 300))
+        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZABLE_HANDLE), random.randint(1, 300), random.randint(1, 300))
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE))
-        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZABLE_HANDLE),
-                                            random.randint(-200, -1), random.randint(-200, -1))
+        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZABLE_HANDLE), random.randint(-200, -1), random.randint(-200, -1))
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE))
         return max_size, min_size
 
@@ -155,19 +152,19 @@ class DroppablePage(BasePage):
 class DraggablePage(BasePage):
     locators = DraggablePageLocators()
 
+    @allure.step('simple drag and drop')
+    def simple_drag_box(self):
+        self.element_is_visible(self.locators.SIMPLE_TAB).click()
+        drag_div = self.element_is_visible(self.locators.DRAG_ME)
+        before_position, after_position = self.get_before_and_after_position(drag_div)
+        return before_position, after_position
+
     @allure.step('get before and after positions')
     def get_before_and_after_position(self, drag_element):
         self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
         before_position = drag_element.get_attribute('style')
         self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
         after_position = drag_element.get_attribute('style')
-        return before_position, after_position
-
-    @allure.step('simple drag and drop')
-    def simple_drag_box(self):
-        self.element_is_visible(self.locators.SIMPLE_TAB).click()
-        drag_div = self.element_is_visible(self.locators.DRAG_ME)
-        before_position, after_position = self.get_before_and_after_position(drag_div)
         return before_position, after_position
 
     @allure.step('get top position')

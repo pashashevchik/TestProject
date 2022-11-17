@@ -1,9 +1,11 @@
 import os
+import random
+import time
 
 import allure
-from selenium.webdriver import Keys
 
-from generator.generator import generated_person, generated_file
+from selenium.webdriver import Keys
+from generator.generator import generated_person, generated_file, generated_subjects
 from locators.form_page_locators import FormPageLocators
 from pages.base_page import BasePage
 
@@ -15,13 +17,14 @@ class FormPage(BasePage):
     def fill_form_fields(self):
         person = next(generated_person())
         file_name, path = generated_file()
+        subjects = random.sample(next(generated_subjects()).subjects_name, k=1)
         self.remove_footer()
         self.element_is_visible(self.locators.FIRST_NAME).send_keys(person.firstname)
         self.element_is_visible(self.locators.LAST_NAME).send_keys(person.lastname)
         self.element_is_visible(self.locators.EMAIL).send_keys(person.email)
         self.element_is_visible(self.locators.GENDER).click()
         self.element_is_visible(self.locators.MOBILE).send_keys(person.mobile)
-        self.element_is_visible(self.locators.SUBJECT).send_keys("Math")
+        self.element_is_visible(self.locators.SUBJECT).send_keys(subjects)
         self.element_is_visible(self.locators.SUBJECT).send_keys(Keys.RETURN)
         self.element_is_visible(self.locators.HOBBIES).click()
         self.element_is_present(self.locators.FILE_INPUT).send_keys(path)

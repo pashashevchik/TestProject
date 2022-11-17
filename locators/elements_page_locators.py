@@ -3,11 +3,11 @@ from selenium.webdriver.common.by import By
 
 class TextBoxPageLocators:
     # form fields
-    FULL_NAME = (By.CSS_SELECTOR, "input[id='userName']")
-    EMAIL = (By.CSS_SELECTOR, 'input[id="userEmail"]')
-    CURRENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="currentAddress"]')
-    PERMANENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="permanentAddress"]')
-    SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"]')
+    FULL_NAME_FIELD_SELECTOR = (By.CSS_SELECTOR, "input[id='userName']")
+    EMAIL_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="userEmail"]')
+    CURRENT_ADDRESS_FIELD_SELECTOR = (By.CSS_SELECTOR, 'textarea[id="currentAddress"]')
+    PERMANENT_ADDRESS_FIELD_SELECTOR = (By.CSS_SELECTOR, 'textarea[id="permanentAddress"]')
+    SUBMIT_BUTTON_SELECTOR = (By.CSS_SELECTOR, 'button[id="submit"]')
 
     # created from
     CREATED_FULL_NAME = (By.CSS_SELECTOR, '#output #name')
@@ -27,20 +27,19 @@ class CheckBoxPageLocators:
 class RadioButtonPageLocators:
     YES_RADIOBUTTON = (By.CSS_SELECTOR, 'label[class^="custom-control"][for="yesRadio"]')
     IMPRESSIVE_RADIOBUTTON = (By.CSS_SELECTOR, 'label[class^="custom-control"][for="impressiveRadio"]')
-    NO_RADIOBUTTON = (By.CSS_SELECTOR, 'label[class^="custom-control"][for="noRadio"]')
     OUTPUT_RESULT = (By.CSS_SELECTOR, 'p span[class="text-success"]')
 
 
 class WebTablePageLocators:
     # add person form
-    ADD_BUTTON = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
-    FIRSTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="firstName"]')
-    LASTNAME_INPUT = (By.CSS_SELECTOR, 'input[id="lastName"]')
-    EMAIL_INPUT = (By.CSS_SELECTOR, 'input[id="userEmail"]')
-    AGE_INPUT = (By.CSS_SELECTOR, 'input[id="age"]')
-    SALARY_INPUT = (By.CSS_SELECTOR, 'input[id="salary"]')
-    DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
-    SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"]')
+    ADD_BUTTON_SELECTOR = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
+    FIRSTNAME_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="firstName"]')
+    LASTNAME_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="lastName"]')
+    EMAIL_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="userEmail"]')
+    AGE_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="age"]')
+    SALARY_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="salary"]')
+    DEPARTMENT_FIELD_SELECTOR = (By.CSS_SELECTOR, 'input[id="department"]')
+    SUBMIT_BUTTON_SELECTOR = (By.CSS_SELECTOR, 'button[id="submit"]')
 
     # table
     FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
@@ -51,13 +50,13 @@ class WebTablePageLocators:
     COUNT_ROW_LIST = (By.CSS_SELECTOR, 'select[aria-label="rows per page"]')
 
     # update
-    UPDATE_BUTTON = (By.CSS_SELECTOR, 'span[title="Edit"]')
+    UPDATE_BUTTON_SELECTOR = (By.CSS_SELECTOR, 'span[title="Edit"]')
 
 
 class ButtonsPageLocators:
     DOUBLE_BUTTON = (By.CSS_SELECTOR, "button[id='doubleClickBtn']")
     RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, "button[id='rightClickBtn']")
-    CLICK_ME_BUTTON = (By.XPATH, "//div[3]/button")
+    CLICK_ME_BUTTON = (By.XPATH, "//button[text()='Click Me']")
 
     # result
     SUCCESS_DOUBLE = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')

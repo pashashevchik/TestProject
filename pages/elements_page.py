@@ -2,9 +2,9 @@ import base64
 import os
 import time
 import random
-
 import allure
 import requests
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 
@@ -18,7 +18,7 @@ from pages.base_page import BasePage
 class TextBoxPage(BasePage):
     locators = TextBoxPageLocators()
 
-    @allure.step("Fill in all fields")
+    @allure.step("Fill all fields")
     def fill_all_fields(self):
         person_info = next(generated_person())
         full_name = person_info.full_name
@@ -26,12 +26,12 @@ class TextBoxPage(BasePage):
         current_address = person_info.current_address
         permanent_address = person_info.permanent_address
         with allure.step('filing fields'):
-            self.element_is_visible(self.locators.FULL_NAME).send_keys(full_name)
-            self.element_is_visible(self.locators.EMAIL).send_keys(email)
-            self.element_is_visible(self.locators.CURRENT_ADDRESS).send_keys(current_address)
-            self.element_is_visible(self.locators.PERMANENT_ADDRESS).send_keys(permanent_address)
+            self.element_is_visible(self.locators.FULL_NAME_FIELD_SELECTOR).send_keys(full_name)
+            self.element_is_visible(self.locators.EMAIL_FIELD_SELECTOR).send_keys(email)
+            self.element_is_visible(self.locators.CURRENT_ADDRESS_FIELD_SELECTOR).send_keys(current_address)
+            self.element_is_visible(self.locators.PERMANENT_ADDRESS_FIELD_SELECTOR).send_keys(permanent_address)
         with allure.step('click submit button'):
-            self.element_is_visible(self.locators.SUBMIT).click()
+            self.element_is_visible(self.locators.SUBMIT_BUTTON_SELECTOR).click()
         return full_name, email, current_address, permanent_address
 
     @allure.step('check filled form')
@@ -88,7 +88,7 @@ class RadioButtonPage(BasePage):
     def click_on_the_radio_button(self, choice):
         choices = {'yes': self.locators.YES_RADIOBUTTON,
                    'impressive': self.locators.IMPRESSIVE_RADIOBUTTON,
-                   'no': self.locators.NO_RADIOBUTTON}
+                   }
         self.element_is_visible(choices[choice]).click()
 
     @allure.step('get output result')
@@ -110,14 +110,14 @@ class WebTablePage(BasePage):
             age = person_info.age
             salary = person_info.salary
             department = person_info.department
-            self.element_is_visible(self.locators.ADD_BUTTON).click()
-            self.element_is_visible(self.locators.FIRSTNAME_INPUT).send_keys(firstname)
-            self.element_is_visible(self.locators.LASTNAME_INPUT).send_keys(lastname)
-            self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
-            self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
-            self.element_is_visible(self.locators.SALARY_INPUT).send_keys(salary)
-            self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
-            self.element_is_visible(self.locators.SUBMIT).click()
+            self.element_is_visible(self.locators.ADD_BUTTON_SELECTOR).click()
+            self.element_is_visible(self.locators.FIRSTNAME_FIELD_SELECTOR).send_keys(firstname)
+            self.element_is_visible(self.locators.LASTNAME_FIELD_SELECTOR).send_keys(lastname)
+            self.element_is_visible(self.locators.EMAIL_FIELD_SELECTOR).send_keys(email)
+            self.element_is_visible(self.locators.AGE_FIELD_SELECTOR).send_keys(age)
+            self.element_is_visible(self.locators.SALARY_FIELD_SELECTOR).send_keys(salary)
+            self.element_is_visible(self.locators.DEPARTMENT_FIELD_SELECTOR).send_keys(department)
+            self.element_is_visible(self.locators.SUBMIT_BUTTON_SELECTOR).click()
             count -= 1
             return [firstname, lastname, str(age), email, str(salary), department]
 
@@ -136,17 +136,17 @@ class WebTablePage(BasePage):
     @allure.step('check found person')
     def check_search_person(self):
         delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
-        row = delete_button.find_element_by_xpath(self.locators.ROW_PARENT)
-        return row.text.splitlines()
+        row = delete_button.find_element(By.XPATH, self.locators.ROW_PARENT).text
+        return row.splitlines()
 
     @allure.step('update person information')
     def update_person_info(self):
         person_info = next(generated_person())
         age = person_info.age
-        self.element_is_visible(self.locators.UPDATE_BUTTON).click()
-        self.element_is_visible(self.locators.AGE_INPUT).clear()
-        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
-        self.element_is_visible(self.locators.SUBMIT).click()
+        self.element_is_visible(self.locators.UPDATE_BUTTON_SELECTOR).click()
+        self.element_is_visible(self.locators.AGE_FIELD_SELECTOR).clear()
+        self.element_is_visible(self.locators.AGE_FIELD_SELECTOR).send_keys(age)
+        self.element_is_visible(self.locators.SUBMIT_BUTTON_SELECTOR).click()
         return str(age)
 
     @allure.step('delete person')
@@ -161,10 +161,10 @@ class WebTablePage(BasePage):
     def select_up_to_some_rows(self):
         count = [5, 10, 20, 25, 50, 100]
         data = []
+        self.remove_footer()
         for x in count:
-            count_row_button = self.element_is_present(self.locators.COUNT_ROW_LIST)
-            self.go_to_element(count_row_button)
-            count_row_button.click()
+            self.go_to_element(self.element_is_present(self.locators.COUNT_ROW_LIST))
+            self.element_is_present(self.locators.COUNT_ROW_LIST).click()
             self.element_is_visible((By.CSS_SELECTOR, f'option[value="{x}"]')).click()
             data.append(self.check_count_rows())
         return data
@@ -235,7 +235,7 @@ class UploadAndDownloadPage(BasePage):
     def download_file(self):
         link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
         link_b = base64.b64decode(link)
-        path_name_file = rf'E:\automation_qa_course\filetest{random.randint(0, 999)}.jpg'
+        path_name_file = rf'D:\\filetest{random.randint(0, 999)}.jpg'
         with open(path_name_file, 'wb+') as f:
             offset = link_b.find(b'\xff\xd8')
             f.write(link_b[offset:])

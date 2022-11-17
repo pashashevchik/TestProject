@@ -40,6 +40,7 @@ class SliderPageLocators:
 class ProgressBarPageLocators:
     PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, 'button[id="startStopButton"]')
     PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
+    PROGRESS_BAR_RESET_BUTTON = (By.CSS_SELECTOR, 'button[id="resetButton"]')
 
 
 class TabsPageLocators:
@@ -49,8 +50,6 @@ class TabsPageLocators:
     TABS_ORIGIN_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-origin"]')
     TABS_USE = (By.CSS_SELECTOR, 'a[id="demo-tab-use"]')
     TABS_USE_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-use"]')
-    TABS_MORE = (By.CSS_SELECTOR, 'a[id="demo-tab-more"]')
-    TABS_MORE_CONTENT = (By.CSS_SELECTOR, 'div[id="demo-tabpane-more"]')
 
 
 class ToolTipsPageLocators:
@@ -71,3 +70,11 @@ class ToolTipsPageLocators:
 
 class MenuPageLocators:
     MENU_ITEM_LIST = (By.CSS_SELECTOR, 'ul[id="nav"] li a')
+
+
+class SelectMenuPageLocators:
+    SELECT_VALUE_FIELD = (By.CSS_SELECTOR, "div[id='withOptGroup']")
+    SELECT_ONE_FIELD = (By.CSS_SELECTOR, "div[id='selectOne']")
+    OLD_STYLE_SELECT_MENU = (By.CSS_SELECTOR, "select[id='oldSelectMenu']")
+    MULTISELECT_DROP_DOWN = (By.CSS_SELECTOR, "div[style='opacity: 1; transition: opacity 260ms ease 0s;']")
+    MULTI_SELECT_SELECTOR = (By.CSS_SELECTOR, "[id='cars']")

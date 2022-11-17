@@ -26,3 +26,8 @@ class Date:
     month: str = None
     year: str = None
     time: str = None
+
+
+@dataclass()
+class Subjects:
+    subjects_name: list = None

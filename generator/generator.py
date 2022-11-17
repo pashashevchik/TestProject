@@ -1,6 +1,6 @@
 import random
 
-from data.data import Person, Color, Date
+from data.data import Person, Color, Date, Subjects
 from faker import Faker
 
 faker_ru = Faker('ru_RU')
@@ -24,7 +24,7 @@ def generated_person():
 
 
 def generated_file():
-    path = rf'E:\automation_qa_course\filetest{random.randint(0, 999)}.txt'
+    path = rf'C:\Users\Koil\Desktop\Новая папка\filetest{random.randint(0, 999)}.txt'
     file = open(path, 'w+')
     file.write(f'Hello World{random.randint(0, 999)}')
     file.close()
@@ -42,5 +42,15 @@ def generated_date():
         year=fake_en.year(),
         month=fake_en.month_name(),
         day=fake_en.day_of_month(),
-        time="12:00"
+        time="00:00"
     )
+
+
+def generated_subjects():
+    yield Subjects(
+           subjects_name=["Hindi", "English", "Maths", "Physics","Chemistry", "Biology", "Computer Science", "Commerce",
+                          "Accounting", "Economics", "Arts", "Social Studies", "History", "Civics"]
+    )
+
+
+

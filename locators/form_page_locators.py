@@ -7,7 +7,7 @@ class FormPageLocators:
     FIRST_NAME = (By.CSS_SELECTOR, '#firstName')
     LAST_NAME = (By.CSS_SELECTOR, '#lastName')
     EMAIL = (By.CSS_SELECTOR, '#userEmail')
-    GENDER = (By.CSS_SELECTOR, f"div[class*='custom-control'] label[for='gender-radio-{random.randint(1, 3)}']")
+    GENDER = (By.CSS_SELECTOR, f"label[for='gender-radio-{random.randint(1, 3)}']")
     MOBILE = (By.CSS_SELECTOR, "input[id='userNumber']")
     DATE_OF_BIRTH = (By.CSS_SELECTOR, 'id="dateOfBirthInput"')
     SUBJECT = (By.CSS_SELECTOR, 'input[id="subjectsInput"]')

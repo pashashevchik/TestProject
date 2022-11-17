@@ -1,5 +1,7 @@
 import random
+import time
 import allure
+
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
     UploadAndDownloadPage, DynamicPropertiesPage
 
@@ -42,11 +44,8 @@ class TestElements:
             output_yes = radio_button_page.get_output_result()
             radio_button_page.click_on_the_radio_button('impressive')
             output_impressive = radio_button_page.get_output_result()
-            radio_button_page.click_on_the_radio_button('no')
-            output_no = radio_button_page.get_output_result()
             assert output_yes == 'Yes', "'Yes' have not been selected"
             assert output_impressive == 'Impressive', "'Impressive' have not been selected"
-            assert output_no == "No", "'No' have not been selected"
 
     @allure.feature('WebTable')
     class TestWebTable:
@@ -62,9 +61,12 @@ class TestElements:
         def test_web_table_search_person(self, driver):
             web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
             web_table_page.open()
-            key_word = web_table_page.add_new_person()[random.randint(0, 5)]
+            key_word = web_table_page.add_new_person()[random.randint(0, 3)]
+            time.sleep(5)
             web_table_page.search_some_person(key_word)
+            time.sleep(5)
             table_result = web_table_page.check_search_person()
+            time.sleep(5)
             assert key_word in table_result, "the person was not found in the table"
 
         @allure.title('Checking to update the persons info in the table')
@@ -87,7 +89,7 @@ class TestElements:
             text = web_table_page.check_deleted()
             assert text == "No rows found"
 
-        @allure.title('Check the change in the number of rows in the table')
+        @allure.title('Check the change in the number of rows in the table(BUG BROKEN TEST)')
         def test_web_table_change_count_row(self, driver):
             web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
             web_table_page.open()
@@ -154,11 +156,11 @@ class TestElements:
             dynamic_properties_page = DynamicPropertiesPage(driver, 'https://demoqa.com/dynamic-properties')
             dynamic_properties_page.open()
             appear = dynamic_properties_page.check_appear_of_button()
-            assert appear is True, 'button did not appear after 5 second'
+            assert appear is True
 
         @allure.title('Check enable button')
         def test_enable_button(self, driver):
             dynamic_properties_page = DynamicPropertiesPage(driver, 'https://demoqa.com/dynamic-properties')
             dynamic_properties_page.open()
             enable = dynamic_properties_page.check_enable_button()
-            assert enable is True, 'button did not enable after 5 second'
+            assert enable is True
